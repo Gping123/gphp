@@ -2,22 +2,23 @@
 
 namespace Gphp\App;
 
-
+use Gphp\Filesystem\Dir;
 use Gphp\Traits\AttributeTrait;
+use Gphp\Traits\SingletonTrait;
 
 class App
 {
-    use AttributeTrait;
-
-    /**
-     * @var null
-     */
-    public static $app = null;
+    use AttributeTrait , SingletonTrait;
 
     /**
      * 版本信息
      */
     const VERSION = 'v1.0.0';
+
+    /**
+     * @var null
+     */
+    public static $app = null;
 
     /**
      * @var string 根目录
@@ -30,18 +31,23 @@ class App
      */
     protected function __construct(string $rootDir = '')
     {
-        $this->rootDir = $rootDir;
+        $this->init($rootDir);
     }
 
     /**
-     * @throws \Exception
+     * 初始化应用
+     *
+     * @param string $rootDir
      * @author GP
-     * DateTime: 2021/1/21 10:05
+     * DateTime: 2021/1/22 15:56
      */
-    private function __clone()
+    public function init(string $rootDir)
     {
-        throw new \Exception('无法cloneApp对象');
+        $this->setRootDir($rootDir);
+
+
     }
+
 
     /**
      * 应用运行
@@ -52,6 +58,20 @@ class App
     public function run()
     {
 
+
+
+    }
+
+    /**
+     * 获取项目根目录
+     *
+     * @return string
+     * @author GP
+     * DateTime: 2021/1/22 16:14
+     */
+    public function getRootDir()
+    {
+        return $this->rootDir;
     }
 
     /**
@@ -64,6 +84,21 @@ class App
     public function getVersion()
     {
         return self::VERSION;
+    }
+
+    /**
+     * 设置项目根目录
+     *
+     * @param string $rootDir
+     * @author GP
+     * DateTime: 2021/1/22 16:58
+     */
+    protected function setRootDir(string $rootDir)
+    {
+        $rootDirArr = explode(DIRECTORY_SEPARATOR, $rootDir);
+        array_pop($rootDirArr);
+
+        $this->rootDir = implode(DIRECTORY_SEPARATOR, $rootDirArr);
     }
 
     #===================== 静态方法 =====================

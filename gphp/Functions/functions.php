@@ -28,3 +28,25 @@ if (!function_exists('dd')) {
     }
 }
 
+/**
+ * app 函数
+ */
+if (!function_exists('app')) {
+    function app() {
+        return \Gphp\App\App::create();
+    }
+}
+
+/**
+ * config 函数
+ */
+if (!function_exists('config')) {
+    function config($key) {
+        $config = \Gphp\App\Config::create();
+        return $config->get($key);
+    }
+}
+
+
+
+
