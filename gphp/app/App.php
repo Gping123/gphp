@@ -3,6 +3,7 @@
 namespace Gphp\App;
 
 use Gphp\Filesystem\Dir;
+use Gphp\Route\Router;
 use Gphp\Traits\AttributeTrait;
 use Gphp\Traits\SingletonTrait;
 
@@ -26,6 +27,11 @@ class App
     protected $rootDir = '';
 
     /**
+     * @var Router
+     */
+    protected $route;
+
+    /**
      * App constructor.
      * @param string $rootDir
      */
@@ -45,6 +51,8 @@ class App
     {
         $this->setRootDir($rootDir);
 
+        // 加载路由
+        $this->route = Router::create($this->rootDir);
 
     }
 
@@ -57,8 +65,8 @@ class App
      */
     public function run()
     {
-
-
+        # 分发路由 处理
+        $response = $this->route->distribution();
 
     }
 

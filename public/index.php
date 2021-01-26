@@ -3,6 +3,9 @@
 # 引入composer自动加载文件
 require __DIR__.'/../vendor/autoload.php';
 
+
+const MODULE_DIR = './';
+
 # 创建一个应用
 $app = \Gphp\App\App::create(__DIR__);
 

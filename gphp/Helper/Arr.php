@@ -26,9 +26,9 @@ class Arr
         $pathStr = '';
         foreach ($pathA as $key => $path) {
             if ($path == array_key_first($pathA)) {
-                $path = rtrim($path, $separator) . '/';
+                $path = rtrim($path, $separator) . $separator;
             } else {
-                $path = '/' . ltrim($path, $separator);
+                $path = $separator . ltrim($path, $separator);
             }
 
             $pathStr .= $path;
